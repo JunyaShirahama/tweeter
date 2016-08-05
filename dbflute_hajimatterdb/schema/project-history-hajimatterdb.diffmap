@@ -1,0 +1,157 @@
+map:{
+    ; 2016/08/04 16:45:18 = map:{
+        ; diffDate = 2016/08/04 16:45:18
+        ; tableDiff = map:{
+            ; TWEET = map:{
+                ; tableName = TWEET
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; TWEET_ID = map:{
+                        ; columnName = TWEET_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 19
+                            ; previous = 10
+                        }
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 19
+                            ; previous = 10
+                        }
+                    }
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = DELETE
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 19
+                            ; previous = 10
+                        }
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = DELETE
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; USER_FOLLOWING = map:{
+                ; tableName = USER_FOLLOWING
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_FOLLOWING_ID = map:{
+                        ; columnName = USER_FOLLOWING_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 19
+                            ; previous = 10
+                        }
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                    ; FOLLOWER_USER_ID = map:{
+                        ; columnName = FOLLOWER_USER_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 19
+                            ; previous = 10
+                        }
+                    }
+                    ; FOLLOWING_USER_ID = map:{
+                        ; columnName = FOLLOWING_USER_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 19
+                            ; previous = 10
+                        }
+                    }
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = DELETE
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+}
