@@ -2,14 +2,17 @@ package com.hajimatter.twitterpractice.user.domain;
 
 import java.sql.Date;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.dbflute.cbean.result.ListResultBean;
 import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hajimatter.dbflute.exbhv.UserBhv;
 import com.hajimatter.dbflute.exentity.User;
-import com.hajimatter.twitterpractice.user.domain.spec.UserSpecification;
+import com.hajimatter.twitterpractice.user.domain.spec.IUserSpecification;
 
 @Repository
 public class UserRepository {
@@ -31,7 +34,7 @@ public class UserRepository {
 	 * @param spec
 	 * @return
 	 */
-	public UserEtt findOne(UserSpecification spec) {
+	public UserEtt findOne(IUserSpecification spec) {
 		OptionalEntity<User> user = userBhv.selectEntity(spec.toQuery());
 		// userBhv.selectEntity(cb->{
 		// cb.query().setUserName_Equal(userName);
@@ -41,6 +44,20 @@ public class UserRepository {
 			return convertToEntity(user.get());
 		} else {
 			return null;
+		}
+	}
+	
+	public List<UserEtt> find(IUserSpecification spec) {
+		ListResultBean<User> selectList = userBhv.selectList(spec.toQuery());
+		if(selectList == null) {
+			return null;
+		} else {
+			List<UserEtt> userList = new ArrayList<>();
+			for (User user : selectList) {
+				UserEtt userEtt = convertToEntity(user);
+				userList.add(userEtt);
+			}
+			return userList;
 		}
 	}
 

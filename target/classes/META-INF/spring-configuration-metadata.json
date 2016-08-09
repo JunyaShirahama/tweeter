@@ -1,0 +1,10 @@
+{
+  "groups": [{
+    "name": "spring.datasource.mysql",
+    "type": "javax.sql.DataSource",
+    "sourceType": "com.hajimatter.twitterpractice.config.DataSourceConfiguration",
+    "sourceMethod": "public javax.sql.DataSource dataSource() "
+  }],
+  "properties": [],
+  "hints": []
+}
