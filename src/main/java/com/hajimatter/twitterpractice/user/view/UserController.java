@@ -1,6 +1,9 @@
 package com.hajimatter.twitterpractice.user.view;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hajimatter.twitterpractice.following.domain.FollowingEtt;
+import com.hajimatter.twitterpractice.following.domain.FollowingRepository;
+import com.hajimatter.twitterpractice.following.domain.spec.FollowingSpecificationForFollowList;
 import com.hajimatter.twitterpractice.user.domain.UserEtt;
 import com.hajimatter.twitterpractice.user.domain.UserRepository;
 import com.hajimatter.twitterpractice.user.domain.UserService;
@@ -25,6 +31,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private FollowingRepository followingRepository;
 
 	@RequestMapping(value = "/top", method = RequestMethod.GET)
 	public ModelAndView top(ModelAndView mav) {
@@ -78,15 +86,40 @@ public class UserController {
 	public ModelAndView userlist(ModelAndView mav) {
 		mav.setViewName("userList");
 		return mav;
-	}
-
+	}	
+	
+	// フォローしている人としてない人の情報を加えたユーザー一覧の取得
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	@ResponseBody
-	public List<UserEtt> userList(ModelAndView mav) {
+	public List<UserPO> userList(ModelAndView mav) {
+		// TODO login user id: 1
+		long loginUserId = 1;
 		mav.setViewName("users");
+		// ユーザーDBからuserListを取得（本来ならばページングを考慮する。とりあえず全件取得）
 		IUserSpecification spec = new UserSpecificationForUserList("aaa");
 		List<UserEtt> userList = userRepository.find(spec);
-		return userList;
+		List<Long> userIds  = new ArrayList<>();
+		// userListのユーザーからidを抽出してuserIdのリスト(=userIds)を作る
+		for(UserEtt user : userList){
+			userIds.add(user.getId());
+		}
+		// ログイン中であるフォロワー（予定）のloginUserId（とりあえずid:1）とuserIdsからloginUserIdの人がフォローしているフォローレコードの一覧(=followsings)を取得
+		List<FollowingEtt> followings  = followingRepository.find(new FollowingSpecificationForFollowList(loginUserId, userIds));
+		// followingsからidを抽出して、followingsUserIdsを作る（存在すればフォローしているという判断ができる）
+		Set<Long> followingUserIds = new HashSet<>();
+		for(FollowingEtt following : followings){
+			followingUserIds.add(following.getFollowingUserId());
+		}
+		// 最終的に画面出したい情報=UserPOの一覧
+		List<UserPO> userPOs  = new ArrayList<>();
+		// UserEttからidとusernameを取得。followingUserIdsの中にidがあればtrue、なければfalse
+		for(UserEtt user : userList){
+			Long id = user.getId();
+			String username = user.getUsername();
+			boolean isFollowing = followingUserIds.contains(id);
+			userPOs.add(new UserPO(id, username, isFollowing));
+		}
+		return userPOs;
 	}
 
 	@RequestMapping(value = "/main", method = RequestMethod.POST)

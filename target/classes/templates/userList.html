@@ -17,9 +17,15 @@
 			<div>
 				<ul>
 					<template v-for="user in result.list">
-					<input class="jsc-user-id" type="hidden" name="user_id" value="{{ user.id }}" />
-					<p>{{ user.username }}</p>
-						<button class="jsc-follow" v-on:click="follow">フォローする</button>
+						<input class="jsc-user-id" type="hidden" name="user_id"
+							value="{{ user.id }}" />
+						<p>{{ user.username }}</p>
+					<div v-if="!user.following">
+						<button class="jsc-follow" v-on:click="follow($index)">フォローする</button>
+					</div>
+					<div v-if="user.following">
+						フォロー済みです
+					</div>
 					</template>
 				</ul>
 			</div>
@@ -32,11 +38,29 @@
 						list : []
 					}
 				},
-				methods: {
-					follow: function(event){
-						debugger;
-						var $d = $(this).closest(".jsc-user-id");
-						alert($(this).closest(".jsc-user-id").val());
+				methods : {
+					follow : function(index) {
+						var that = this;
+						var id = that.result.list[index].id;
+						var data = {
+							followerUserId : 1,
+							followingUserId : id
+						};
+						$.ajax({
+							type : "POST",
+							url : "/follows",
+							contentType : 'application/json',
+							data : JSON.stringify(data),
+							dataType : "text",
+							success : function(data) {
+								// 成功時の処理としてリスト形式の結果を代入する
+								// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
+								alert("success");
+								that.result.list[index].following = true;
+							},
+							error : function(xhr, ajaxOptions, thrownError) {
+							}
+						});
 					}
 				},
 				created : function() {
@@ -53,8 +77,6 @@
 					});
 				}
 			})
-			
-
 		</script>
 	</div>
 

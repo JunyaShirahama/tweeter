@@ -4,7 +4,7 @@ import org.dbflute.bhv.readable.CBCall;
 
 import com.hajimatter.dbflute.cbean.UserCB;
 
-public class UserSpecificationForLogin implements IUserSpecification{
+public class UserSpecificationForLogin implements IUserSpecification {
 	
 	private String userName;
 	
