@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hajimatter.twitterpractice.base.application.PagingListData;
+import com.hajimatter.twitterpractice.base.infrastructure.PagingList;
 import com.hajimatter.twitterpractice.following.domain.FollowingEtt;
 import com.hajimatter.twitterpractice.following.domain.FollowingRepository;
 import com.hajimatter.twitterpractice.following.domain.spec.FollowingSpecificationForFollowList;
@@ -21,8 +23,8 @@ import com.hajimatter.twitterpractice.user.domain.UserEtt;
 import com.hajimatter.twitterpractice.user.domain.UserRepository;
 import com.hajimatter.twitterpractice.user.domain.UserService;
 import com.hajimatter.twitterpractice.user.domain.spec.IUserSpecification;
+import com.hajimatter.twitterpractice.user.domain.spec.UserPagingSpecificationByUserId;
 import com.hajimatter.twitterpractice.user.domain.spec.UserSpecificationByUserId;
-import com.hajimatter.twitterpractice.user.domain.spec.UserSpecificationForUserList;
 
 /**
  * @author junya.shirahama
@@ -92,13 +94,13 @@ public class UserController {
 	// フォローしている人としてない人の情報を加えたユーザー一覧の取得
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	@ResponseBody
-	public List<UserPO> userList(ModelAndView mav) {
+	public PagingListData<UserPO> userList(ModelAndView mav, @SessionAttribute("userId") Long userId, @RequestParam(required = false, name="p") Integer pageNumber) {
 		// TODO login user id: 1
-		long loginUserId = 1;
+		long loginUserId = userId;
 		mav.setViewName("users");
 		// ユーザーDBからuserListを取得（本来ならばページングを考慮する。とりあえず全件取得）
-		IUserSpecification spec = new UserSpecificationForUserList("aaa");
-		List<UserEtt> userList = userRepository.find(spec);
+		IUserSpecification spec = new UserPagingSpecificationByUserId(userId , pageNumber);
+		PagingList<UserEtt> userList = userRepository.findPage(spec);
 		List<Long> userIds  = new ArrayList<>();
 		// userListのユーザーからidを抽出してuserIdのリスト(=userIds)を作る
 		for(UserEtt user : userList){
@@ -120,7 +122,7 @@ public class UserController {
 			boolean isFollowing = followingUserIds.contains(id);
 			userPOs.add(new UserPO(id, username, isFollowing));
 		}
-		return userPOs;
+		return new PagingListData<>(userList.getCurrentPage(), userList.existsNextPage(), userPOs);
 	}
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)

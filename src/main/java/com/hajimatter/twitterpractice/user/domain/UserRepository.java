@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dbflute.cbean.result.ListResultBean;
+import org.dbflute.cbean.result.PagingResultBean;
 import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hajimatter.dbflute.exbhv.UserBhv;
 import com.hajimatter.dbflute.exentity.User;
+import com.hajimatter.twitterpractice.base.infrastructure.PagingList;
 import com.hajimatter.twitterpractice.user.domain.spec.IUserSpecification;
 
 @Repository
@@ -59,6 +61,17 @@ public class UserRepository {
 			}
 			return userList;
 		}
+	}
+	
+	public PagingList<UserEtt> findPage(IUserSpecification spec){
+		PagingResultBean<User> selectPage = userBhv.selectPage(spec.toQuery());
+		List<UserEtt> userList = new ArrayList<>();
+		for (User user : selectPage) {
+			UserEtt userEtt = convertToEntity(user);
+			userList.add(userEtt);
+		}
+		PagingList<UserEtt> pagingUsers = new PagingList<>(selectPage.getCurrentPageNumber(), selectPage.existsNextPage(),userList);
+		return pagingUsers;
 	}
 
 	private UserEtt convertToEntity(User user) {

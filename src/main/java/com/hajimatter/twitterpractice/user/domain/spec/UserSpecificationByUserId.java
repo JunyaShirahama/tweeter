@@ -18,4 +18,6 @@ public class UserSpecificationByUserId implements IUserSpecification {
 	public UserSpecificationByUserId(long userId) {
 		this.userId = userId;
 	}
+	
+	
 }

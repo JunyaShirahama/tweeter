@@ -20,7 +20,9 @@ public class TweetPO {
 	
 	public TweetPO(TweetEtt tweet, String userName){
 		id = tweet.getId();
-		// ...
+		userId = tweet.getUserId();
+		contents = tweet.getContents();
+		tweetDateTime = tweet.getTweetDateTime();
 		this.userName = userName;
 		
 	}
