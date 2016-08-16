@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hajimatter.twitterpractice.base.application.PagingListData;
+import com.hajimatter.twitterpractice.base.infrastructure.PagingList;
 import com.hajimatter.twitterpractice.following.domain.FollowingEtt;
 import com.hajimatter.twitterpractice.following.domain.FollowingRepository;
 import com.hajimatter.twitterpractice.following.domain.spec.FollowingSpecificationByUserId;
@@ -21,7 +23,7 @@ import com.hajimatter.twitterpractice.following.domain.spec.IFollowingSpecificat
 import com.hajimatter.twitterpractice.twitter.domain.TweetEtt;
 import com.hajimatter.twitterpractice.twitter.domain.TwitterRepository;
 import com.hajimatter.twitterpractice.twitter.domain.spec.ITweetSpecification;
-import com.hajimatter.twitterpractice.twitter.domain.spec.TweetSpecificationForTweetList;
+import com.hajimatter.twitterpractice.twitter.domain.spec.TweetPagingSpecificationForTweetList;
 import com.hajimatter.twitterpractice.user.domain.UserEtt;
 import com.hajimatter.twitterpractice.user.domain.UserRepository;
 import com.hajimatter.twitterpractice.user.domain.spec.IUserSpecification;
@@ -53,7 +55,7 @@ public class TwitterController {
 	// フォローしているユーザーのツイートを取得（したい）
 	@RequestMapping(value = "/tweets", method = RequestMethod.GET)
 	@ResponseBody
-	public List<TweetPO> tweetPOs(@SessionAttribute("userId") Long userId, int pageNumber) {
+	public PagingListData<TweetPO> tweetPageList(@SessionAttribute("userId") Long userId, @RequestParam(required = false, name="p") Integer pageNumber) {
 		
 		IFollowingSpecification spec2 = new FollowingSpecificationByUserId(userId);
 		List<FollowingEtt> followings = followingRepository.find(spec2);
@@ -62,8 +64,8 @@ public class TwitterController {
 		for (FollowingEtt following : followings) {
 			followingUserIds.add(following.getFollowingUserId());
 		}
-		ITweetSpecification spec3 = new TweetSpecificationForTweetList(followingUserIds);
-		List<TweetEtt> tweetList = twitterRepository.find(spec3);
+		ITweetSpecification spec3 = new TweetPagingSpecificationForTweetList(followingUserIds, pageNumber);
+		PagingList<TweetEtt> tweetList = twitterRepository.findPage(spec3);
 
 		IUserSpecification spec = new UserSpecificationByUserIds(followingUserIds);
 		List<UserEtt> users = userRepository.find(spec);
@@ -78,6 +80,6 @@ public class TwitterController {
 			UserEtt user = userMap.get(tweetUserId);
 			tweetPOs.add(new TweetPO(tweet, user.getUsername()));
 		}
-		return tweetPOs;
+		return new PagingListData<>(tweetList.getCurrentPage(), tweetList.existsNextPage(), tweetPOs);
 	}
 }

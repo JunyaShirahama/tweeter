@@ -24,11 +24,7 @@
 		</header>
 
 		<form action="/tweets" method="post">
-			<p>
-				ツイート：
-				<textarea cols="30" rows="3" name="tweet">
-				
-			</textarea>
+			ツイート：<p><textarea cols="30" rows="3" name="tweet">なんかつぶやきましょう。</textarea>
 			</p>
 			<p>
 				<input type="submit"></input>
@@ -44,13 +40,15 @@
 					</template>
 				</ul>
 			</div>
+			<button v-if="result.existsNextPage" v-on:click="nextPage()" value="もっと見る">もっと見る</button>
 		</div>
 		<script>
 			new Vue({
 				el : '#app',
 				data : {
 					result : {
-						list : []
+						list : [],
+						existsNextPage : true
 					}
 				},
 				created : function() {
@@ -62,9 +60,28 @@
 						success : function(list) {
 							// 成功時の処理としてリスト形式の結果を代入する
 							// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
-							that.result.list = list;
+							that.result.list = list.data;
+							that.result.currentPageNumber = list.currentPageNumber;
+							that.result.existsNextPage = list.existsNextPage;
 						}
 					});
+				},
+				methods : {
+					nextPage : function() {
+						var that = this;
+						$.ajax({
+							type : "GET",
+							url : "/tweets?p=" + (that.result.currentPageNumber+1),
+							dataType : "json",
+							success : function(list) {
+								for (var index in list.data){
+									that.result.list.push(list.data[index]);
+								}
+								that.result.currentPageNumber = list.currentPageNumber;
+								that.result.existsNextPage = list.existsNextPage;
+							}
+						});
+					}
 				}
 			});
 		</script>

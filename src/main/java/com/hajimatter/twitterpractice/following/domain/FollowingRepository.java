@@ -56,6 +56,6 @@ public class FollowingRepository {
 		if (userFollowing == null) {
 			return null;
 		}
-		return new FollowingEtt(userFollowing.getFollowerUserId(), userFollowing.getFollowingUserId());
+		return new FollowingEtt(userFollowing.getFollowingUserId());
 	}
 }

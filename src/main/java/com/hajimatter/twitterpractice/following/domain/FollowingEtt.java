@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author junya.shirahama
@@ -11,15 +12,15 @@ import lombok.Getter;
 public class FollowingEtt {
 
 	@Getter
-	private long id;
+	private Long id;
 	@Getter
-	private long followerUserId;
+	@Setter
+	private Long followerUserId;
 	@Getter
-	private long followingUserId;
+	private Long followingUserId;
 	
 	@JsonCreator
-	public FollowingEtt(@JsonProperty("followerUserId") long followerUserId,@JsonProperty("followingUserId") long followingUserId) {
-		this.followerUserId = followerUserId;
+	public FollowingEtt( @JsonProperty("followingUserId") long followingUserId) {
 		this.followingUserId = followingUserId;
 	}
 

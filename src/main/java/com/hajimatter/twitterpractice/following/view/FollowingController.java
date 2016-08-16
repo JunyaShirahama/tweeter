@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.hajimatter.twitterpractice.following.domain.FollowingEtt;
@@ -22,13 +23,12 @@ public class FollowingController {
 	private FollowingService followingService;
 
 	@RequestMapping(value = "/follows", method = RequestMethod.POST)
-	public ResponseEntity<?> follow(
-			@RequestBody FollowingEtt following) {
-		Long followingId =followingService.register(following);
+	public ResponseEntity<?> follow(@RequestBody FollowingEtt following, @SessionAttribute("userId") Long followerUserId) {
+		following.setFollowerUserId(followerUserId);
+		Long followingId = followingService.register(following);
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setLocation(ServletUriComponentsBuilder
-				.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(followingId).toUri());
+		httpHeaders.setLocation(
+				ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(followingId).toUri());
 		return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
 	}
 }

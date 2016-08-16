@@ -44,29 +44,9 @@ public class UserController {
 		return mav;
 	}
 
-//	@RequestMapping(value = "/top", method = RequestMethod.POST)
-//	public ModelAndView top2(ModelAndView mav) {
-//		mav.setViewName("top");
-//		return mav;
-//	}
-
-	// 特定のユーザー名とパスワードを入れるとtrueかfalseで返して、二つともtrueならmain画面、それ以外はtop画面に移る
-//	@RequestMapping(value = "/login", method = RequestMethod.POST)
-//	public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,
-//			ModelAndView mav) {
-//		if (userService.login(username, password)) {
-//			mav.setViewName("main");
-//			return mav;
-//		} else {
-//			mav.setViewName("top");
-//			return mav;
-//		}
-//	}
-
 	// 会員登録
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	public ModelAndView register(@RequestParam("username") String username, @RequestParam("password") String password, ModelAndView mav) {
-
 		UserEtt user = new UserEtt(username, password);
 		userService.register(user);
 		mav.setViewName("top");

@@ -26,7 +26,6 @@ public class UserRepository {
 		User entity = new User();
 		entity.setUserName(user.getUsername());
 		entity.setPassword(user.getPassword());
-
 		userBhv.insert(entity);
 	}
 
