@@ -303,7 +303,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
-		<td><a href="#user" title="type=TABLE, primaryKey={USER_ID}, nameLength=4, columnCount=4">USER</a></td>
+		<td><a href="#user" title="type=TABLE, primaryKey={USER_ID}, nameLength=4, columnCount=5">USER</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#tweet" title="tweet_ibfk_1">TWEET</a>, <a href="#user_following" title="user_following_ibfk_2">USER_FOLLOWING</a>, <a href="#user_following" title="user_following_ibfk_1">USER_FOLLOWING</a></td>
@@ -412,7 +412,7 @@ TWEET
 		<td class="subcell">LocalDateTime</td>
 	</tr>
 </table>
-<h2 id="user" title="type=TABLE, primaryKey={USER_ID}, nameLength=4, columnCount=4">
+<h2 id="user" title="type=TABLE, primaryKey={USER_ID}, nameLength=4, columnCount=5">
 USER
 </h2>
 <table>
@@ -488,6 +488,23 @@ USER
 	</tr>
 	<tr>
 		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="user_favorite_artist">FAVORITE_ARTIST</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 20 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="subcell">favoriteArtist</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>

@@ -16,7 +16,7 @@ import com.hajimatter.dbflute.exentity.*;
  *     USER_ID
  * 
  * [column]
- *     USER_ID, USER_NAME, PASSWORD, REGISTER_DATETIME
+ *     USER_ID, USER_NAME, PASSWORD, FAVORITE_ARTIST, REGISTER_DATETIME
  * 
  * [sequence]
  *     
@@ -44,10 +44,12 @@ import com.hajimatter.dbflute.exentity.*;
  * Long userId = entity.getUserId();
  * String userName = entity.getUserName();
  * String password = entity.getPassword();
+ * String favoriteArtist = entity.getFavoriteArtist();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * entity.setUserId(userId);
  * entity.setUserName(userName);
  * entity.setPassword(password);
+ * entity.setFavoriteArtist(favoriteArtist);
  * entity.setRegisterDatetime(registerDatetime);
  * = = = = = = = = = =/
  * </pre>
@@ -72,6 +74,9 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
 
     /** PASSWORD: {NotNull, VARCHAR(20)} */
     protected String _password;
+
+    /** FAVORITE_ARTIST: {NotNull, VARCHAR(20)} */
+    protected String _favoriteArtist;
 
     /** REGISTER_DATETIME: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]} */
     protected java.time.LocalDateTime _registerDatetime;
@@ -219,6 +224,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         sb.append(dm).append(xfND(_userId));
         sb.append(dm).append(xfND(_userName));
         sb.append(dm).append(xfND(_password));
+        sb.append(dm).append(xfND(_favoriteArtist));
         sb.append(dm).append(xfND(_registerDatetime));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
@@ -302,6 +308,24 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     public void setPassword(String password) {
         registerModifiedProperty("password");
         _password = password;
+    }
+
+    /**
+     * [get] FAVORITE_ARTIST: {NotNull, VARCHAR(20)} <br>
+     * @return The value of the column 'FAVORITE_ARTIST'. (basically NotNull if selected: for the constraint)
+     */
+    public String getFavoriteArtist() {
+        checkSpecifiedProperty("favoriteArtist");
+        return _favoriteArtist;
+    }
+
+    /**
+     * [set] FAVORITE_ARTIST: {NotNull, VARCHAR(20)} <br>
+     * @param favoriteArtist The value of the column 'FAVORITE_ARTIST'. (basically NotNull if update: for the constraint)
+     */
+    public void setFavoriteArtist(String favoriteArtist) {
+        registerModifiedProperty("favoriteArtist");
+        _favoriteArtist = favoriteArtist;
     }
 
     /**

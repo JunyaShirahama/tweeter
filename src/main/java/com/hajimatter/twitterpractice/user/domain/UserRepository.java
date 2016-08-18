@@ -26,13 +26,14 @@ public class UserRepository {
 		User entity = new User();
 		entity.setUserName(user.getUsername());
 		entity.setPassword(user.getPassword());
+		entity.setFavoriteArtist(user.getFavoriteArtist());
 		userBhv.insert(entity);
 	}
 	
 	public  void update(UserEtt user) {
 		User entity = new User();
 		entity.setUserId(user.getId());
-		entity.setPassword(user.getPassword());
+		entity.setFavoriteArtist(user.getFavoriteArtist());
 		userBhv.update(entity);
 	}
 

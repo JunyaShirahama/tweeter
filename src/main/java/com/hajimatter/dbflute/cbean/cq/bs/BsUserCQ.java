@@ -175,6 +175,26 @@ public class BsUserCQ extends AbstractBsUserCQ {
      */
     public BsUserCQ addOrderBy_Password_Desc() { regOBD("PASSWORD"); return this; }
 
+    protected ConditionValue _favoriteArtist;
+    public ConditionValue xdfgetFavoriteArtist()
+    { if (_favoriteArtist == null) { _favoriteArtist = nCV(); }
+      return _favoriteArtist; }
+    protected ConditionValue xgetCValueFavoriteArtist() { return xdfgetFavoriteArtist(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @return this. (NotNull)
+     */
+    public BsUserCQ addOrderBy_FavoriteArtist_Asc() { regOBA("FAVORITE_ARTIST"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @return this. (NotNull)
+     */
+    public BsUserCQ addOrderBy_FavoriteArtist_Desc() { regOBD("FAVORITE_ARTIST"); return this; }
+
     protected ConditionValue _registerDatetime;
     public ConditionValue xdfgetRegisterDatetime()
     { if (_registerDatetime == null) { _registerDatetime = nCV(); }

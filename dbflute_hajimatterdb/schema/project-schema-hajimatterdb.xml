@@ -30,6 +30,8 @@
             name="USER_NAME" required="true" size="10" type="VARCHAR"/>
         <column comment="" dbType="VARCHAR" javaType="String"
             name="PASSWORD" required="true" size="20" type="VARCHAR"/>
+        <column comment="" dbType="VARCHAR" javaType="String"
+            name="FAVORITE_ARTIST" required="true" size="20" type="VARCHAR"/>
         <column comment="" dbType="TIMESTAMP"
             default="CURRENT_TIMESTAMP"
             javaType="java.time.LocalDateTime" name="REGISTER_DATETIME"

@@ -45,6 +45,7 @@ public class UserDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((User)et).getUserId(), (et, vl) -> ((User)et).setUserId(ctl(vl)), "userId");
         setupEpg(_epgMap, et -> ((User)et).getUserName(), (et, vl) -> ((User)et).setUserName((String)vl), "userName");
         setupEpg(_epgMap, et -> ((User)et).getPassword(), (et, vl) -> ((User)et).setPassword((String)vl), "password");
+        setupEpg(_epgMap, et -> ((User)et).getFavoriteArtist(), (et, vl) -> ((User)et).setFavoriteArtist((String)vl), "favoriteArtist");
         setupEpg(_epgMap, et -> ((User)et).getRegisterDatetime(), (et, vl) -> ((User)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
     }
     public PropertyGateway findPropertyGateway(String prop)
@@ -69,6 +70,7 @@ public class UserDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Long.class, "userId", null, true, true, true, "BIGINT", 19, 0, null, false, null, null, null, "tweetList,userFollowingByFollowingUserIdList,userFollowingByFollowerUserIdList", null, false);
     protected final ColumnInfo _columnUserName = cci("USER_NAME", "USER_NAME", null, null, String.class, "userName", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, null, String.class, "password", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnFavoriteArtist = cci("FAVORITE_ARTIST", "FAVORITE_ARTIST", null, null, String.class, "favoriteArtist", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "TIMESTAMP", 19, 0, "CURRENT_TIMESTAMP", false, null, null, null, null, null, false);
 
     /**
@@ -87,6 +89,11 @@ public class UserDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnPassword() { return _columnPassword; }
     /**
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnFavoriteArtist() { return _columnFavoriteArtist; }
+    /**
      * REGISTER_DATETIME: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]}
      * @return The information object of specified column. (NotNull)
      */
@@ -97,6 +104,7 @@ public class UserDbm extends AbstractDBMeta {
         ls.add(columnUserId());
         ls.add(columnUserName());
         ls.add(columnPassword());
+        ls.add(columnFavoriteArtist());
         ls.add(columnRegisterDatetime());
         return ls;
     }

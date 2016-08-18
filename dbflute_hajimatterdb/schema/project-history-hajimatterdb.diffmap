@@ -1,4 +1,19 @@
 map:{
+    ; 2016/08/18 20:37:31 = map:{
+        ; diffDate = 2016/08/18 20:37:31
+        ; tableDiff = map:{
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; FAVORITE_ARTIST = map:{
+                        ; columnName = FAVORITE_ARTIST
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2016/08/04 16:45:18 = map:{
         ; diffDate = 2016/08/04 16:45:18
         ; tableDiff = map:{

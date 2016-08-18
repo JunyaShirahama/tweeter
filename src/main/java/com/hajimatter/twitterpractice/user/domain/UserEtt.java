@@ -13,11 +13,14 @@ public class UserEtt {
 	@Getter
 	private String password;
 	@Getter
+	private String favoriteArtist;
+	@Getter
 	private Date registerDateTime;
 	
-	public UserEtt(String username, String password) {
+	public UserEtt(String username, String password, String favoriteArtist) {
 		this.username = username;
 		this.password = password;
+		this.favoriteArtist = favoriteArtist;
 		this.registerDateTime = new Date();
 	}
 
@@ -35,9 +38,9 @@ public class UserEtt {
 		this.registerDateTime = registerDateTime;
 	}
 
-	public UserEtt(long id, String password) {
+	public UserEtt(long id, String favoriteArtist) {
 		this.id = id;
-		this.password = password;
+		this.favoriteArtist = favoriteArtist;
 	}
 	
 }

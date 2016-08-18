@@ -46,8 +46,8 @@ public class UserController {
 
 	// 会員登録
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public ModelAndView register(@RequestParam("username") String username, @RequestParam("password") String password, ModelAndView mav) {
-		UserEtt user = new UserEtt(username, password);
+	public ModelAndView register(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("favoriteArtist") String favoriteArtist, ModelAndView mav) {
+		UserEtt user = new UserEtt(username, password, favoriteArtist);
 		userService.register(user);
 		mav.setViewName("top");
 		return mav;
@@ -77,8 +77,8 @@ public class UserController {
 	
 	// 会員情報を変更
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public ModelAndView user(@SessionAttribute("userId") Long userId, @RequestParam("password") String password, ModelAndView mav) {
-		UserEtt user = new UserEtt(userId, password);
+	public ModelAndView user(@SessionAttribute("userId") Long userId, @RequestParam("favoriteArtist") String favoriteArtist, ModelAndView mav) {
+		UserEtt user = new UserEtt(userId, favoriteArtist);
 		userRepository.update(user);
 		mav.setViewName("userInformation");
 		return mav;

@@ -28,7 +28,7 @@ import com.hajimatter.dbflute.cbean.*;
  *     USER_ID
  *
  * [column]
- *     USER_ID, USER_NAME, PASSWORD, REGISTER_DATETIME
+ *     USER_ID, USER_NAME, PASSWORD, FAVORITE_ARTIST, REGISTER_DATETIME
  *
  * [sequence]
  *     

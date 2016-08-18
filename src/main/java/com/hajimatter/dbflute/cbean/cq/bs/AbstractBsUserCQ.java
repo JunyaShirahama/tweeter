@@ -662,6 +662,141 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     protected abstract ConditionValue xgetCValuePassword();
 
     /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_Equal(String favoriteArtist) {
+        doSetFavoriteArtist_Equal(fRES(favoriteArtist));
+    }
+
+    protected void doSetFavoriteArtist_Equal(String favoriteArtist) {
+        regFavoriteArtist(CK_EQ, favoriteArtist);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as notEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_NotEqual(String favoriteArtist) {
+        doSetFavoriteArtist_NotEqual(fRES(favoriteArtist));
+    }
+
+    protected void doSetFavoriteArtist_NotEqual(String favoriteArtist) {
+        regFavoriteArtist(CK_NES, favoriteArtist);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as greaterThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_GreaterThan(String favoriteArtist) {
+        regFavoriteArtist(CK_GT, fRES(favoriteArtist));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as lessThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_LessThan(String favoriteArtist) {
+        regFavoriteArtist(CK_LT, fRES(favoriteArtist));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as greaterEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_GreaterEqual(String favoriteArtist) {
+        regFavoriteArtist(CK_GE, fRES(favoriteArtist));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as lessEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_LessEqual(String favoriteArtist) {
+        regFavoriteArtist(CK_LE, fRES(favoriteArtist));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtistList The collection of favoriteArtist as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_InScope(Collection<String> favoriteArtistList) {
+        doSetFavoriteArtist_InScope(favoriteArtistList);
+    }
+
+    protected void doSetFavoriteArtist_InScope(Collection<String> favoriteArtistList) {
+        regINS(CK_INS, cTL(favoriteArtistList), xgetCValueFavoriteArtist(), "FAVORITE_ARTIST");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtistList The collection of favoriteArtist as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setFavoriteArtist_NotInScope(Collection<String> favoriteArtistList) {
+        doSetFavoriteArtist_NotInScope(favoriteArtistList);
+    }
+
+    protected void doSetFavoriteArtist_NotInScope(Collection<String> favoriteArtistList) {
+        regINS(CK_NINS, cTL(favoriteArtistList), xgetCValueFavoriteArtist(), "FAVORITE_ARTIST");
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)} <br>
+     * <pre>e.g. setFavoriteArtist_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param favoriteArtist The value of favoriteArtist as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setFavoriteArtist_LikeSearch(String favoriteArtist, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setFavoriteArtist_LikeSearch(favoriteArtist, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)} <br>
+     * <pre>e.g. setFavoriteArtist_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param favoriteArtist The value of favoriteArtist as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setFavoriteArtist_LikeSearch(String favoriteArtist, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(favoriteArtist), xgetCValueFavoriteArtist(), "FAVORITE_ARTIST", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setFavoriteArtist_NotLikeSearch(String favoriteArtist, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setFavoriteArtist_NotLikeSearch(favoriteArtist, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+     * @param favoriteArtist The value of favoriteArtist as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setFavoriteArtist_NotLikeSearch(String favoriteArtist, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(favoriteArtist), xgetCValueFavoriteArtist(), "FAVORITE_ARTIST", likeSearchOption);
+    }
+
+    protected void regFavoriteArtist(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueFavoriteArtist(), "FAVORITE_ARTIST"); }
+    protected abstract ConditionValue xgetCValueFavoriteArtist();
+
+    /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
      * REGISTER_DATETIME: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]}
      * @param registerDatetime The value of registerDatetime as equal. (basically NotNull: error as default, or no condition as option)

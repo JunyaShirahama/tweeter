@@ -307,6 +307,11 @@ public class BsUserCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPassword() { return doColumn("PASSWORD"); }
         /**
+         * FAVORITE_ARTIST: {NotNull, VARCHAR(20)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnFavoriteArtist() { return doColumn("FAVORITE_ARTIST"); }
+        /**
          * REGISTER_DATETIME: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]}
          * @return The information object of specified column. (NotNull)
          */
