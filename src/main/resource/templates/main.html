@@ -3,17 +3,19 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layouts/base">
 <head>
-<title>メイン画面</title>
+<meta charset="UTF-8"></meta>
+<title>main画面</title>
 </head>
 <body>
 	<div layout:fragment="content">
 		<header>
 			<div id="example">
 				<h1 th:text="${msg}"></h1>
+				<p><a href="/userinformation">ユーザー情報の編集</a></p>
 			</div>
 			<nav>
 				<ul>
-					<li><a href="/userlist">ユーザー一覧</a></li>
+					<p><a href="/userlist">ユーザー一覧</a></p>
 					<form action="/logout" method="POST">
 						<p>
 							<input type="submit" value="ログアウト"></input>
@@ -23,15 +25,14 @@
 			</nav>
 		</header>
 
-		<form action="/tweets" method="post">
-			ツイート：<p><textarea cols="30" rows="3" name="tweet">なんかつぶやきましょう。</textarea>
+		<div id="app">
+			<input type="hidden" th:value="${username}" v-model="tweetName"/>
+			ツイート：<p><textarea cols="30" rows="3" name="tweet" v-model="tweetText">{{ tweetText }}</textarea>
 			</p>
 			<p>
-				<input type="submit"></input>
+				<button type="button" class="jsc-tweet" v-on:click="tweet()">ツイート</button>
 			</p>
-		</form>
 
-		<div id="app">
 			<div>
 				<ul>
 					<template v-for="tweet in result.list">
@@ -48,8 +49,10 @@
 				data : {
 					result : {
 						list : [],
-						existsNextPage : true
-					}
+						existsNextPage : true,
+					},
+					tweetText : "",
+					tweetName : ""
 				},
 				created : function() {
 					var that = this;
@@ -58,7 +61,7 @@
 						url : "/tweets",
 						dataType : "json",
 						success : function(list) {
-							// 成功時の処理としてリスト形式の結果を代入する
+							// 謌仙粥譎ゅ�ｮ蜃ｦ逅�縺ｨ縺励※繝ｪ繧ｹ繝亥ｽ｢蠑上�ｮ邨先棡繧剃ｻ｣蜈･縺吶ｋ
 							// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
 							that.result.list = list.data;
 							that.result.currentPageNumber = list.currentPageNumber;
@@ -79,6 +82,32 @@
 								}
 								that.result.currentPageNumber = list.currentPageNumber;
 								that.result.existsNextPage = list.existsNextPage;
+							}
+						});
+					},
+					tweet : function() {
+						var that = this;
+						if (that.tweetText.length > 140) {
+							alert("140文字以下でツイートしてください");
+							return;
+						}
+						var data = {
+								contents : that.tweetText
+						};
+						$.ajax({
+							type : "POST",
+							url : "/tweets",
+							contentType : 'application/json',
+							data : JSON.stringify(data),
+							//dataType : "text",
+							success : function(tweetData) {
+								var tweet = { "userName" : that.tweetName, "contents" : that.tweetText};
+								that.result.list.unshift(tweet);
+								that.tweetText = "";
+								alert("ツイートしました");
+							},
+							error : function(xhr, ajaxOption, thrownError) {
+								alert("error");
 							}
 						});
 					}

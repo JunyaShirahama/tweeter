@@ -28,6 +28,13 @@ public class UserRepository {
 		entity.setPassword(user.getPassword());
 		userBhv.insert(entity);
 	}
+	
+	public  void update(UserEtt user) {
+		User entity = new User();
+		entity.setUserId(user.getId());
+		entity.setPassword(user.getPassword());
+		userBhv.update(entity);
+	}
 
 	/**
 	 * 一つの会員を検索する。見つかったらUserEttを返却する。なかったらnullを返却する。

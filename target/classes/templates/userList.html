@@ -3,6 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layouts/base">
 <head>
+<meta charset="UTF-8"></meta>
 <title>ユーザー一覧</title>
 </head>
 <body>
@@ -10,7 +11,7 @@
 
 		<h1>ユーザー一覧</h1>
 		<h2>
-			<a href="main.html">mainに戻る</a>
+			<a href="main">mainに戻る</a>
 		</h2>
 
 		<div id="app">
@@ -22,7 +23,7 @@
 					<div v-if="!user.following">
 						<button class="jsc-follow" v-on:click="follow($index)">フォローする</button>
 					</div>
-					<div v-if="user.following">フォロー済みです</div>
+					<div v-if="user.following">フォローしました</div>
 				</template>
 			</ul>
 			<button v-if="result.existsNextPage" v-on:click="nextPage()" value="もっと見る">もっと見る</button>
@@ -44,7 +45,7 @@
 										url : "/users",
 										dataType : "json",
 										success : function(result) {
-											// 成功時の処理としてリスト形式の結果を代入する
+											// 謌仙粥譎ゅ�ｮ蜃ｦ逅�縺ｨ縺励※繝ｪ繧ｹ繝亥ｽ｢蠑上�ｮ邨先棡繧剃ｻ｣蜈･縺吶ｋ
 											// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
 											that.result.list = result.data;
 											that.result.currentPageNumber = result.currentPageNumber;
@@ -66,7 +67,7 @@
 											data : JSON.stringify(data),
 											dataType : "text",
 											success : function(data) {
-												// 成功時の処理としてリスト形式の結果を代入する
+												// 謌仙粥譎ゅ�ｮ蜃ｦ逅�縺ｨ縺励※繝ｪ繧ｹ繝亥ｽ｢蠑上�ｮ邨先棡繧剃ｻ｣蜈･縺吶ｋ
 												// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
 												that.result.list[index].following = true;
 											},

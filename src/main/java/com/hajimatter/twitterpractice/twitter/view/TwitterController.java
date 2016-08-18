@@ -6,13 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.hajimatter.twitterpractice.base.application.PagingListData;
 import com.hajimatter.twitterpractice.base.infrastructure.PagingList;
@@ -43,13 +48,21 @@ public class TwitterController {
 	private FollowingRepository followingRepository;
 
 	// ツイート入力画面から内容を入れるとツイートのデータが入る
+//	@RequestMapping(value = "/tweets", method = RequestMethod.POST)
+//	public ModelAndView tweet(@RequestParam("tweet") String contents, @SessionAttribute("userId") Long userId,
+//			ModelAndView mav) {
+//		mav.setViewName("main");
+//		TweetEtt twitterEtt = new TweetEtt(userId, contents);
+//		twitterRepository.add(twitterEtt);
+//		return mav;
+//	}
 	@RequestMapping(value = "/tweets", method = RequestMethod.POST)
-	public ModelAndView tweet(@RequestParam("tweet") String contents, @SessionAttribute("userId") Long userId,
-			ModelAndView mav) {
-		mav.setViewName("main");
-		TweetEtt twitterEtt = new TweetEtt(userId, contents);
-		twitterRepository.add(twitterEtt);
-		return mav;
+	public ResponseEntity<?> tweet(@RequestBody @Validated TweetEtt tweet, @SessionAttribute("userId") Long userId) {
+		tweet.setUserId(userId);
+		Long tweetId = twitterRepository.add(tweet);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tweetId).toUri());
+		return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
 	}
 
 	// フォローしているユーザーのツイートを取得（したい）

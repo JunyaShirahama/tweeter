@@ -40,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	
         // 認可の設定
         http.authorizeRequests()
-            .antMatchers("/createAccount", "/top").permitAll() // indexは全ユーザーアクセス許可
+        // TODO /usersを外す
+            .antMatchers("/createAccount", "/top", "/users").permitAll() // indexは全ユーザーアクセス許可
             .anyRequest().authenticated();  // それ以外は全て認証無しの場合アクセス不許可
 
         // ログイン設定

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/base">
+<head>
+<meta charset="UTF-8"></meta>
+<title>ユーザー情報編集</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:text="${username}"></h1>
+		<div>
+			<p>好きな食べ物</p>
+			<p>◯◯◯◯</p>
+		</div>
+		<form action="/user" method="POST">
+		<div>パスワード
+			<input type="password" name="password"></input><br></br>
+			<input type="submit" value="変更"></input>
+		</div>
+		<p><a href="main">mainに戻る</a></p>
+		</form>
+	</div>
+</body>
+</html>

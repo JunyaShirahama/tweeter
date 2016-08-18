@@ -21,12 +21,12 @@ public class TwitterRepository {
 	@Autowired
 	private TweetBhv tweetBhv;
 	
-	public void add(TweetEtt tweet) {
+	public Long add(TweetEtt tweet) {
 		Tweet entity = new Tweet();
 		entity.setUserId(tweet.getUserId());
 		entity.setContents(tweet.getContents());
-		
 		tweetBhv.insert(entity);
+		return entity.getTweetId();
 	}
 	
 	public List<TweetEtt> find(ITweetSpecification spec) {

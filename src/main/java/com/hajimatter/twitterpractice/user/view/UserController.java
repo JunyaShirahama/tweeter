@@ -65,6 +65,25 @@ public class UserController {
 //		return mav;
 //	}
 	
+	// 会員情報の取得
+	@RequestMapping(value = "/userinformation", method = RequestMethod.GET)
+	public ModelAndView userinformation(ModelAndView mav, @SessionAttribute("userId") Long userId) {
+		IUserSpecification spec = new UserSpecificationByUserId(userId);
+		UserEtt user = userRepository.findOne(spec);
+		mav.addObject("username", user.getUsername());
+		mav.setViewName("userInformation");
+		return mav;
+	}
+	
+	// 会員情報を変更
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public ModelAndView user(@SessionAttribute("userId") Long userId, @RequestParam("password") String password, ModelAndView mav) {
+		UserEtt user = new UserEtt(userId, password);
+		userRepository.update(user);
+		mav.setViewName("userInformation");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/userlist", method = RequestMethod.GET)
 	public ModelAndView userlist(ModelAndView mav) {
 		mav.setViewName("userList");
@@ -111,6 +130,7 @@ public class UserController {
 		IUserSpecification spec = new UserSpecificationByUserId(userId);
 		UserEtt user = userRepository.findOne(spec);
 		mav.addObject("msg", "ようこそ " + user.getUsername() + " さん");
+		mav.addObject("username", user.getUsername());
 		return mav;
 	}
 

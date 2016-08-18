@@ -10,7 +10,6 @@
 		<config>java:com.hajimatter.twitterpractice.TwitterPracticeApp</config>
 	</configs>
 	<autoconfigs>
-		<config>java:hello.HelloWorldConfiguration</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

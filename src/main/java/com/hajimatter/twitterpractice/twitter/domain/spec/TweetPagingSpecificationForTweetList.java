@@ -18,6 +18,7 @@ public class TweetPagingSpecificationForTweetList implements ITweetSpecification
 	public CBCall<TweetCB> toQuery() {
 		return cb -> {
 			cb.query().setUserId_InScope(followingUserIds);
+			cb.query().addOrderBy_TweetDatetime_Desc();
 			cb.paging(PAGE_SIZE, pageNumber);
 		};
 	}

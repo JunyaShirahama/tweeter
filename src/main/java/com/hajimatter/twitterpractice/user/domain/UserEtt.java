@@ -34,5 +34,10 @@ public class UserEtt {
 		this.password = password;
 		this.registerDateTime = registerDateTime;
 	}
+
+	public UserEtt(long id, String password) {
+		this.id = id;
+		this.password = password;
+	}
 	
 }
