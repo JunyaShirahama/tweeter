@@ -8,7 +8,7 @@ import com.hajimatter.dbflute.cbean.TweetCB;
 
 public class TweetPagingSpecificationForTweetList implements ITweetSpecification {
 
-	private static final int PAGE_SIZE = 3;
+	private static final int PAGE_SIZE = 10;
 	
 	private Integer pageNumber;
 	

@@ -45,8 +45,6 @@
 										url : "/users",
 										dataType : "json",
 										success : function(result) {
-											// 謌仙粥譎ゅ�ｮ蜃ｦ逅�縺ｨ縺励※繝ｪ繧ｹ繝亥ｽ｢蠑上�ｮ邨先棡繧剃ｻ｣蜈･縺吶ｋ
-											// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
 											that.result.list = result.data;
 											that.result.currentPageNumber = result.currentPageNumber;
 											that.result.existsNextPage = result.existsNextPage;
@@ -67,8 +65,6 @@
 											data : JSON.stringify(data),
 											dataType : "text",
 											success : function(data) {
-												// 謌仙粥譎ゅ�ｮ蜃ｦ逅�縺ｨ縺励※繝ｪ繧ｹ繝亥ｽ｢蠑上�ｮ邨先棡繧剃ｻ｣蜈･縺吶ｋ
-												// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
 												that.result.list[index].following = true;
 											},
 											error : function(xhr, ajaxOptions,

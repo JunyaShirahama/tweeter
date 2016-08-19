@@ -27,11 +27,14 @@
 
 		<div id="app">
 			<input type="hidden" th:value="${username}" v-model="tweetName"/>
+			<input type="hidden" th:value="${favoriteArtist}" v-model="favoriteArtist"/>
 			ツイート：<p><textarea cols="30" rows="3" name="tweet" v-model="tweetText">{{ tweetText }}</textarea>
 			</p>
 			<p>
 				<button type="button" class="jsc-tweet" v-on:click="tweet()">ツイート</button>
 			</p>
+			<iframe v-if="loaded" id="ytplayer" type="text/html" width="720" height="405"
+	frameborder="0" src="{{ youtubeUrl }}"></iframe>
 
 			<div>
 				<ul>
@@ -52,7 +55,10 @@
 						existsNextPage : true,
 					},
 					tweetText : "",
-					tweetName : ""
+					tweetName : "",
+					favoriteArtist : "",
+					loaded : false,
+					youtubeUrl : ""
 				},
 				created : function() {
 					var that = this;
@@ -61,13 +67,29 @@
 						url : "/tweets",
 						dataType : "json",
 						success : function(list) {
-							// 謌仙粥譎ゅ�ｮ蜃ｦ逅�縺ｨ縺励※繝ｪ繧ｹ繝亥ｽ｢蠑上�ｮ邨先棡繧剃ｻ｣蜈･縺吶ｋ
-							// e.g. [{"title": "hoge", "text": "hogehoge"}, ...]
 							that.result.list = list.data;
 							that.result.currentPageNumber = list.currentPageNumber;
 							that.result.existsNextPage = list.existsNextPage;
 						}
 					});
+					setTimeout(function(){
+						$.ajax({
+							type : "GET",
+							data: {
+								"part" : "id",				
+								"q" : that.favoriteArtist,
+								"key" : "AIzaSyA9vSmQ5Y0qXHtllPeZmmVHJjhNgOHS7N8"
+							},
+							url : "https://www.googleapis.com/youtube/v3/search",
+							dataType : "json",
+							success : function(result) {
+								var youtubeUrl = "https://www.youtube.com/embed/";
+								youtubeUrl = youtubeUrl + result.items[0].id.videoId;
+								that.youtubeUrl = youtubeUrl;
+								that.loaded = true;
+							}
+						});
+					}, 500);
 				},
 				methods : {
 					nextPage : function() {

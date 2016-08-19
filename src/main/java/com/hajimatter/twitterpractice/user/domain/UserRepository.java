@@ -85,7 +85,7 @@ public class UserRepository {
 		if (user == null) {
 			return null;
 		}
-		return new UserEtt(user.getUserId(), user.getUserName(), user.getPassword(),
+		return new UserEtt(user.getUserId(), user.getUserName(), user.getPassword(), user.getFavoriteArtist(),
 				Date.from(user.getRegisterDatetime().atZone(ZoneId.systemDefault()).toInstant()));
 	}
 }

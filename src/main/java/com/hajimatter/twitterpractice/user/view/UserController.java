@@ -138,6 +138,7 @@ public class UserController {
 		UserEtt user = userRepository.findOne(spec);
 		mav.addObject("msg", "ようこそ " + user.getUsername() + " さん");
 		mav.addObject("username", user.getUsername());
+		mav.addObject("favoriteArtist", user.getFavoriteArtist());
 		return mav;
 	}
 

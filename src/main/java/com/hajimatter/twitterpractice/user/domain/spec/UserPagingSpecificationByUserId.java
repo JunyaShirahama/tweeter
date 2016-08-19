@@ -10,7 +10,7 @@ public class UserPagingSpecificationByUserId implements IUserSpecification {
 
 	private Integer pageNumber;
 
-	private static final int PAGE_SIZE = 2;
+	private static final int PAGE_SIZE = 10;
 
 	@Override
 	public CBCall<UserCB> toQuery() {

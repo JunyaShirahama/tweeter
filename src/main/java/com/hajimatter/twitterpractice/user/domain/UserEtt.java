@@ -31,10 +31,11 @@ public class UserEtt {
 	 * @param password
 	 * @param registerDateTime
 	 */
-	public UserEtt(long id, String username, String password, Date registerDateTime) {
+	public UserEtt(long id, String username, String password, String fovoriteArtist, Date registerDateTime) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.favoriteArtist = fovoriteArtist;
 		this.registerDateTime = registerDateTime;
 	}
 

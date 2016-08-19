@@ -9,15 +9,9 @@
 <body>
 	<div layout:fragment="content">
 		<h1 th:text="${username}"></h1>
-		<div>
-			<p>好きな食べ物</p>
-			<p>◯◯◯◯</p>
-		</div>
+		
 		<form action="/user" method="POST">
-		<div>パスワード
-			<input type="password" name="password"></input><br></br>
-			<input type="submit" value="変更"></input>
-		</div>
+		
 		<div>好きなアーティスト
 			<input type="text" name="favoriteArtist"></input><br></br>
 			<input type="submit" value="変更"></input>
