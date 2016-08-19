@@ -54,6 +54,7 @@
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/dbflute/bsbhv/BsUserBhv.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/twitter/domain/TweetEtt.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/config/TwitterAuthenticationFailureHandler.java
+/Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/external/YoutubeService.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/dbflute/cbean/UserFollowingCB.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/dbflute/allcommon/DBFluteConfig.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/following/domain/FollowingService.java
@@ -77,6 +78,7 @@
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/dbflute/allcommon/ImplementedInvokerAssistant.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/user/domain/spec/UserSpecificationByUserName.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/user/domain/UserEtt.java
+/Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/external/YoutubeVideo.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/user/domain/spec/UserSpecificationByUserIds.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/dbflute/cbean/cq/ciq/UserCIQ.java
 /Users/junya.shirahama/works/twitter/workspace/twitterPractice/src/main/java/com/hajimatter/twitterpractice/user/domain/UserService.java

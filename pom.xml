@@ -89,11 +89,26 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>4.0.1.RELEASE</version>
 		</dependency>
+		<!-- YouTube Data V3 support -->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-youtube</artifactId>
+			<version>${project.youtube.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-jackson2</artifactId>
+			<version>1.22.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<dbflute.version>1.1.0-sp8</dbflute.version>
+		<project.youtube.version>v3-rev8-1.12.0-beta</project.youtube.version>
+		<project.http.version>1.12.0-beta</project.http.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
@@ -111,12 +126,26 @@
 					<packageBase>com.hajimatter.dbflute</packageBase>
 				</configuration>
 			</plugin>
+			<!-- youtube -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>com.google.api.services.samples.youtube.cmdline.youtube_cmdline_search_sample.Search</mainClass>
+				</configuration>
+			</plugin>
+			<!-- youtube -->
 		</plugins>
 	</build>
 	<repositories>
 		<repository>
 			<id>spring-snapshot</id>
 			<url>https://repo.spring.io/libs-snapshot</url>
+		</repository>
+		<repository>
+			<id>google-api-services</id>
+			<url>http://google-api-client-libraries.appspot.com/mavenrepo</url>
 		</repository>
 	</repositories>
 

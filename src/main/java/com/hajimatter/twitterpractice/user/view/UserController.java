@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hajimatter.twitterpractice.base.application.PagingListData;
 import com.hajimatter.twitterpractice.base.infrastructure.PagingList;
+import com.hajimatter.twitterpractice.external.YoutubeService;
+import com.hajimatter.twitterpractice.external.YoutubeVideo;
 import com.hajimatter.twitterpractice.following.domain.FollowingEtt;
 import com.hajimatter.twitterpractice.following.domain.FollowingRepository;
 import com.hajimatter.twitterpractice.following.domain.spec.FollowingSpecificationForFollowList;
@@ -37,9 +39,14 @@ public class UserController {
 	private UserRepository userRepository;
 	@Autowired
 	private FollowingRepository followingRepository;
+	@Autowired
+	private YoutubeService youtubeService;
 
 	@RequestMapping(value = "/top", method = RequestMethod.GET)
 	public ModelAndView top(ModelAndView mav) {
+//		YoutubeVideo video = youtubeService.findVideos("cat");
+//		System.out.println("video id:" + video.getId());
+		
 		mav.setViewName("top");
 		return mav;
 	}

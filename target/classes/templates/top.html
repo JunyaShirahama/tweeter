@@ -3,6 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>トップ画面</title>
+	<script src="https://npmcdn.com/vue/dist/vue.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 	<h1>ログインしてください</h1>
@@ -20,9 +22,41 @@
 	</p>
 	
 	   <div id="player"></div>
+	   <div id="app"></div>
 
- <iframe id="ytplayer" type="text/html" width="720" height="405"
-src="https://www.youtube.com/embed/M7lc1UVf-VE"
-frameborder="0"></iframe>
+	 <iframe v-if="result.loaded" id="ytplayer" type="text/html" width="720" height="405"
+	frameborder="0"></iframe>
+
+    <script>
+	new Vue({
+		el : '#app',
+		data : {
+			result : {
+				loaded : false
+			},
+		},
+		created : function() {
+			var that = this;
+			$.ajax({
+				type : "GET",
+				data: {
+					"part" : "id",				
+					"q" : "dog",
+					"key" : "AIzaSyA9vSmQ5Y0qXHtllPeZmmVHJjhNgOHS7N8"
+				},
+				url : "https://www.googleapis.com/youtube/v3/search",
+				dataType : "json",
+				success : function(result) {
+					var url = "https://www.youtube.com/embed/"
+					that.result.youtubeUrl = url + result.items[0].id.videoId;
+					$('#ytplayer').attr("src", that.result.youtubeUrl);
+					that.loaded = true;
+				}
+			});
+		}
+	});
+
+    </script>
+  
 </body>
 </html>
