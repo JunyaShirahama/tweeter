@@ -2,6 +2,7 @@ package com.hajimatter.twitterpractice.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 認可の設定
         http.authorizeRequests()
         // TODO /usersを外す
-            .antMatchers("/createAccount", "/top", "/users").permitAll() // indexは全ユーザーアクセス許可
+            .antMatchers("/createAccount", "/top").permitAll() // indexは全ユーザーアクセス許可
+            .antMatchers(HttpMethod.POST, "/users").permitAll()
             .anyRequest().authenticated();  // それ以外は全て認証無しの場合アクセス不許可
 
         // ログイン設定
